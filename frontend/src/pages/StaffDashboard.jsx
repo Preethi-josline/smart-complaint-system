@@ -13,7 +13,7 @@ const StaffDashboard = () => {
   const fetchAssigned = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/complaints/assigned", {
+      const res = await axios.get("https://smart-complaint-system-backend-vyet.onrender.com/api/complaints", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setComplaints(res.data);
