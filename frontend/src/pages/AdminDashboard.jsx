@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     try {
       const [complaintsRes, staffRes] = await Promise.all([
         getAllComplaints(),
-        axios.get("https://smart-complaint-system-backend-vyet.onrender.com/api/auth/staff", {
+        axios.get("http://localhost:5000/api/auth/staff", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         })
       ]);
@@ -53,14 +53,13 @@ const AdminDashboard = () => {
       <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">Admin Panel</h1>
         <div className="flex items-center gap-4">
-          <span className="text-sm">Hello, {user?.name}</span>
-          <Link to="/analytics" className="bg-yellow-400 text-white px-4 py-1 rounded-lg font-semibold">
-          📊 Analytics
-          </Link>
-          <button onClick={handleLogout}className="bg-white text-blue-600 px-4 py-1 rounded-lg font-semibold">Logout</button>
-        </div>
-     </nav>
-    
+            <span className="text-sm">Hello, {user?.name}</span>
+            <Link to="/analytics" className="bg-yellow-400 text-white px-4 py-1 rounded-lg font-semibold">
+              📊 Analytics
+            </Link>
+            <button onClick={handleLogout} className="bg-white text-blue-600 px-4 py-1 rounded-lg font-semibold">Logout</button>
+          </div>
+        </nav>
 
       <div className="max-w-6xl mx-auto mt-10 px-4">
         {/* Stats */}
@@ -105,10 +104,10 @@ const AdminDashboard = () => {
 
                 <div className="flex gap-4 mt-4 flex-wrap">
                   {/* Change Priority */}
-                  <div>
+                  <div className="min-w-[180px]">
                     <label className="text-xs text-gray-500 block mb-1">Change Priority</label>
                     <select
-                      className="border rounded-lg px-3 py-1 text-sm"
+                      className="border rounded-lg px-3 py-2 text-sm w-full bg-white"
                       value={c.priority}
                       onChange={(e) => handlePriority(c._id, e.target.value)}
                     >
@@ -119,10 +118,10 @@ const AdminDashboard = () => {
                   </div>
 
                   {/* Assign Staff */}
-                  <div>
+                  <div className="min-w-[220px]">
                     <label className="text-xs text-gray-500 block mb-1">Assign Staff</label>
                     <select
-                      className="border rounded-lg px-3 py-1 text-sm"
+                      className="border rounded-lg px-3 py-2 text-sm w-full bg-white"
                       value={c.assignedTo?._id || ""}
                       onChange={(e) => handleAssign(c._id, e.target.value)}
                     >
