@@ -10,9 +10,9 @@ const roles = [
 ];
 
 const savedEmails = {
-  user: "joe123@gmail.com",
+  user: "",
   admin: "admin@gmail.com",
-  staff: "staff@gmail.com",
+  staff: "",
 };
 
 const Login = () => {
