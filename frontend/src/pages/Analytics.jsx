@@ -12,7 +12,7 @@ const COLORS = ["#f59e0b", "#3b82f6", "#10b981", "#ef4444"];
 const Analytics = () => {
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

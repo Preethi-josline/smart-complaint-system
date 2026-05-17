@@ -7,9 +7,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user?.role === "admin") navigate("/admin");
-    if (user?.role === "staff") navigate("/staff");
-  }, [user]);
+  if (user?.role === "admin") navigate("/admin");
+  if (user?.role === "staff") navigate("/staff");
+}, [user, navigate]);
 
   const handleLogout = () => { logout(); navigate("/login"); };
 
