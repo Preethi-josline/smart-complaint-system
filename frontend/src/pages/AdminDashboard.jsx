@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     try {
       const [complaintsRes, staffRes] = await Promise.all([
         getAllComplaints(),
-        axios.get("http://localhost:5000/api/auth/staff", {
+        axios.get("https://smart-complaint-system-backend-vyet.onrender.com/api/auth/staff", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         })
       ]);
