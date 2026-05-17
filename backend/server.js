@@ -22,6 +22,8 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 const complaintRoutes = require("./routes/complaintRoutes");
 app.use("/api/complaints", complaintRoutes);
+const notificationRoutes = require("./routes/notificationRoutes");
+app.use("/api/notifications", notificationRoutes);
 // MongoDB Connection
 app.use(express.urlencoded({ extended: true }));
 mongoose

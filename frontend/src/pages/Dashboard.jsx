@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import NotificationBell from "../components/NotificationBell";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -19,6 +20,7 @@ const Dashboard = () => {
         <h1 className="text-xl font-bold">Smart Complaint System</h1>
         <div className="flex items-center gap-4">
           <span className="text-sm">Hello, {user?.name}</span>
+                    <NotificationBell />
           <button onClick={handleLogout}
             className="bg-white text-blue-600 px-4 py-1 rounded-lg font-semibold hover:bg-gray-100">
             Logout

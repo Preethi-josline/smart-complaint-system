@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllComplaints, assignComplaint, changePriority } from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import NotificationBell from "../components/NotificationBell";
 import axios from "axios";
 
 const AdminDashboard = () => {
@@ -54,6 +55,7 @@ const AdminDashboard = () => {
         <h1 className="text-xl font-bold">Admin Panel</h1>
         <div className="flex items-center gap-4">
             <span className="text-sm">Hello, {user?.name}</span>
+            <NotificationBell />
             <Link to="/analytics" className="bg-yellow-400 text-white px-4 py-1 rounded-lg font-semibold">
               📊 Analytics
             </Link>

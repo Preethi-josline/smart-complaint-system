@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { updateStatus } from "../services/api";
+import NotificationBell from "../components/NotificationBell";
 import axios from "axios";
 
 const StaffDashboard = () => {
@@ -44,6 +45,7 @@ const StaffDashboard = () => {
         <h1 className="text-xl font-bold">Staff Panel</h1>
         <div className="flex items-center gap-4">
           <span className="text-sm">Hello, {user?.name}</span>
+                    <NotificationBell />
           <button onClick={handleLogout} className="bg-white text-blue-600 px-4 py-1 rounded-lg font-semibold">
             Logout
           </button>

@@ -23,3 +23,6 @@ export const getAllComplaints = () => API.get("/complaints/all");
 export const assignComplaint = (id, data) => API.put(`/complaints/assign/${id}`, data);
 export const changePriority = (id, data) => API.put(`/complaints/priority/${id}`, data);
 export const updateStatus = (id, data) => API.put(`/complaints/status/${id}`, data);
+export const getNotifications = () => API.get("/notifications");
+export const getUnreadCount = () => API.get("/notifications/unread-count");
+export const markAllRead = () => API.put("/notifications/mark-read");

@@ -72,7 +72,14 @@ const assignComplaint = async (req, res) => {
       req.params.id,
       { assignedTo: staffId, status: "In Progress" },
       { new: true }
-    );
+    ).populate("userId", "name");
+
+    // Create notification for staff
+    await Notification.create({
+      userId: staffId,
+      message: `You have been assigned a new complaint: "${complaint.title}"`,
+      complaintId: complaint._id
+    });
 
     res.status(200).json({ message: "Staff assigned successfully", complaint });
   } catch (error) {
@@ -108,12 +115,18 @@ const updateStatus = async (req, res) => {
       { new: true }
     );
 
+    // Notify the user who raised the complaint
+    await Notification.create({
+      userId: complaint.userId,
+      message: `Your complaint "${complaint.title}" status has been updated to "${status}"`,
+      complaintId: complaint._id
+    });
+
     res.status(200).json({ message: "Status updated", complaint });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
 
 const getAssignedComplaints = async (req, res) => {
   try {
