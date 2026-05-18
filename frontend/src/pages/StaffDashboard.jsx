@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { updateStatus } from "../services/api";
-import NotificationBell from "../components/NotificationBell";
 import axios from "axios";
+import NotificationBell from "../components/NotificationBell";
 
 const StaffDashboard = () => {
   const [complaints, setComplaints] = useState([]);
@@ -14,7 +14,7 @@ const StaffDashboard = () => {
   const fetchAssigned = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://smart-complaint-system-backend-vyet.onrender.com/api/complaints/assigned", {
+      const res = await axios.get("http://localhost:5000/api/complaints/assigned", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setComplaints(res.data);
@@ -27,8 +27,14 @@ const StaffDashboard = () => {
   useEffect(() => { fetchAssigned(); }, []);
 
   const handleStatus = async (id, status) => {
-    await updateStatus(id, { status });
-    fetchAssigned();
+    try {
+      await updateStatus(id, { status });
+      setComplaints(prev =>
+        prev.map(c => c._id === id ? { ...c, status } : c)
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleLogout = () => { logout(); navigate("/login"); };
@@ -45,7 +51,7 @@ const StaffDashboard = () => {
         <h1 className="text-xl font-bold">Staff Panel</h1>
         <div className="flex items-center gap-4">
           <span className="text-sm">Hello, {user?.name}</span>
-                    <NotificationBell />
+          <NotificationBell />
           <button onClick={handleLogout} className="bg-white text-blue-600 px-4 py-1 rounded-lg font-semibold">
             Logout
           </button>
