@@ -31,14 +31,27 @@ const AdminDashboard = () => {
   useEffect(() => { fetchData(); }, []);
 
   const handlePriority = async (id, priority) => {
-    await changePriority(id, { priority });
-    fetchData();
+    try {
+      await changePriority(id, { priority });
+      setComplaints(prev =>
+        prev.map(c => c._id === id ? { ...c, priority } : c)
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleAssign = async (id, staffId) => {
     if (!staffId) return;
-    await assignComplaint(id, { staffId });
-    fetchData();
+    try {
+      await assignComplaint(id, { staffId });
+      const staff = staffList.find(s => s._id === staffId);
+      setComplaints(prev =>
+        prev.map(c => c._id === id ? { ...c, assignedTo: staff, status: "In Progress" } : c)
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleLogout = () => { logout(); navigate("/login"); };
